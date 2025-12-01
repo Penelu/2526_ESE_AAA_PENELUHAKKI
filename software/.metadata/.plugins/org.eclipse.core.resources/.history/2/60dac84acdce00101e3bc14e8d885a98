@@ -1,0 +1,22 @@
+/*
+ * motor.h
+ *
+ *  Created on: Nov 11, 2025
+ *      Author: nicolas
+ */
+
+#ifndef MOTOR_H
+#define MOTOR_H
+
+#include "main.h"
+#include "tim.h"   // Gives access to htim1 and timer registers
+
+uint32_t motor_get_pwm_max(void);
+
+void motor_init(void);
+
+void motor_set_duty(uint32_t duty);
+
+#endif // MOTOR_H
+
+

@@ -7,11 +7,18 @@
 
 #include "motor_control/motor.h"
 
-static uint32_t pwm_max = 0;   // Stores the ARR value of TIM1
+static uint32_t pwm_max     = 0;  // Stores the ARR value of TIM1
+static uint32_t pwm_current = 0;  // Stores the current duty cycle
+
 
 uint32_t motor_get_pwm_max(void)
 {
     return pwm_max;
+}
+
+uint32_t motor_get_duty(void)
+{
+    return pwm_current;
 }
 
 void motor_init(void)
@@ -24,6 +31,8 @@ void motor_init(void)
     if (duty60 > pwm_max) {
         duty60 = pwm_max;
     }
+
+    pwm_current = duty60;
 
     // Apply the initial duty on both motor channels (CH1 and CH2)
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, duty60);
@@ -47,6 +56,8 @@ void motor_set_duty(uint32_t duty)
     if (duty > pwm_max) {
         duty = pwm_max;
     }
+
+    pwm_current = duty;
 
     // Update CCR registers for both PWM channels
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, duty);

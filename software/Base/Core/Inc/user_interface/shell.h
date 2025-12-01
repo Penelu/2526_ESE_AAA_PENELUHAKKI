@@ -20,6 +20,9 @@
 #define SHELL_FUNC_LIST_MAX_SIZE 64            /**< Maximum number of registered shell functions. */
 #define PROMPT "MSC@SAC-TP:/"
 
+#define SPEED_RAMP_STEP       50U   // PWM increment per step
+#define SPEED_RAMP_DELAY_MS   10U   // Delay between steps in ms
+
 struct h_shell_struct;
 
 /**

@@ -6,6 +6,7 @@
  */
 
 #include "user_interface/shell.h"
+#include "motor_control/motor.h"
 #include "tim.h"   // Access to htim1 and TIM_CHANNEL_x
 
 h_shell_t hshell1;
@@ -24,8 +25,9 @@ h_shell_t hshell1;
 // -----------------------------------------------------------------------------
 static int sh_speed(h_shell_t* h_shell, int argc, char** argv)
 {
-    uint32_t value = 0;
-    uint32_t max = __HAL_TIM_GET_AUTORELOAD(&htim1); // Timer's ARR (maximum duty)
+    uint32_t target = 0;
+    uint32_t max    = motor_get_pwm_max();  // PWM max (ARR)
+    uint32_t current;
     int size;
 
     if (argc < 2) {
@@ -47,21 +49,51 @@ static int sh_speed(h_shell_t* h_shell, int argc, char** argv)
         }
 
         // Build integer digit by digit
-        value = value * 10 + (uint32_t)(*p - '0');
+        target = target * 10 + (uint32_t)(*p - '0');
         p++;
     }
 
-    if (value > max) {
-        value = max;
+    if (target > max) {
+        target = max;
     }
 
-    // Apply the duty cycle to the PWM channels
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, value);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, value);
+    current = motor_get_duty();
+
+    if (current == target) {
+        // Nothing to do, already at target speed
+        size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
+                        "Speed unchanged: %lu / %lu\r\n",
+                        (unsigned long)target, (unsigned long)max);
+        h_shell->drv.transmit(h_shell->print_buffer, size);
+        return 0;
+    }
+
+    // Choose ramp direction (up or down)
+    while (current != target) {
+
+        if (current < target) {
+            // Ramp up
+            if ((target - current) > SPEED_RAMP_STEP) {
+                current += SPEED_RAMP_STEP;
+            } else {
+                current = target;
+            }
+        } else {
+            // Ramp down (optional, nice to have)
+            if ((current - target) > SPEED_RAMP_STEP) {
+                current -= SPEED_RAMP_STEP;
+            } else {
+                current = target;
+            }
+        }
+
+        motor_set_duty(current);
+        HAL_Delay(SPEED_RAMP_DELAY_MS);  // Regular time interval between steps
+    }
 
     size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
-                    "Applied speed: %lu / %lu\r\n",
-                    (unsigned long)value, (unsigned long)max);
+                    "Target speed reached: %lu / %lu\r\n",
+                    (unsigned long)target, (unsigned long)max);
     h_shell->drv.transmit(h_shell->print_buffer, size);
 
     return 0;
