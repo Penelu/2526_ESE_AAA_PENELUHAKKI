@@ -1,4 +1,6 @@
 ../Core/Src/motor_control/motor.c:14:10:motor_get_pwm_max	1
 ../Core/Src/motor_control/motor.c:19:10:motor_get_duty	1
 ../Core/Src/motor_control/motor.c:24:6:motor_init	2
-../Core/Src/motor_control/motor.c:48:6:motor_set_duty	3
+../Core/Src/motor_control/motor.c:45:6:motor_set_duty	3
+../Core/Src/motor_control/motor.c:64:6:motor_start	3
+../Core/Src/motor_control/motor.c:89:6:motor_stop	1

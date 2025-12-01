@@ -729,3 +729,59 @@
 2025-12-01 15:41:44,019 [INFO] WebApp:191 - Connection restablished
 2025-12-01 15:41:47,257 [INFO] WebApp:194 - Connection lost
 2025-12-01 15:41:47,361 [INFO] WebApp:191 - Connection restablished
+2025-12-01 16:38:41,425 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-12-01 16:38:42,974 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-12-01 16:38:51,253 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 959633216 Bytes (1073741824)
+2025-12-01 16:38:53,448 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 827893512 Bytes (1073741824)
+2025-12-01 16:38:54,308 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8G4
+2025-12-01 16:38:54,308 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8G4
+2025-12-01 16:38:54,308 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: ADC
+2025-12-01 16:38:54,308 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-12-01 16:38:54,309 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: ADC
+2025-12-01 16:38:54,309 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-12-01 16:38:54,309 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-12-01 16:38:54,310 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USART
+2025-12-01 16:38:54,310 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USART
+2025-12-01 16:38:54,311 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-12-01 16:38:54,313 [INFO] CodeGenerator:892 - code generatio: config db path: C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.15.0.202507011659\\db\
+2025-12-01 16:38:54,621 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\MXTmpFiles\license.tmp_save
+2025-12-01 16:38:55,162 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\MXTmpFiles\license.tmp
+2025-12-01 16:38:55,395 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\gpio.c_save
+2025-12-01 16:38:55,725 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\gpio.c
+2025-12-01 16:38:55,741 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\gpio.h_save
+2025-12-01 16:38:55,841 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\gpio.h
+2025-12-01 16:38:56,868 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\adc.c_save
+2025-12-01 16:38:57,201 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\adc.c
+2025-12-01 16:38:57,215 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\adc.h_save
+2025-12-01 16:38:57,305 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\adc.h
+2025-12-01 16:38:57,332 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\tim.c_save
+2025-12-01 16:38:57,601 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\tim.c
+2025-12-01 16:38:57,616 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\tim.h_save
+2025-12-01 16:38:57,712 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\tim.h
+2025-12-01 16:38:57,737 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\usart.c_save
+2025-12-01 16:38:57,949 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\usart.c
+2025-12-01 16:38:57,962 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\usart.h_save
+2025-12-01 16:38:58,062 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\usart.h
+2025-12-01 16:38:58,091 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\stm32g4xx_it.c_save
+2025-12-01 16:38:58,534 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\stm32g4xx_it.c
+2025-12-01 16:38:58,552 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\stm32g4xx_it.h_save
+2025-12-01 16:38:58,684 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\stm32g4xx_it.h
+2025-12-01 16:38:58,728 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\stm32g4xx_hal_msp.c_save
+2025-12-01 16:38:58,998 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\stm32g4xx_hal_msp.c
+2025-12-01 16:38:59,006 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\MXTmpFiles\system.tmp_save
+2025-12-01 16:38:59,092 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\MXTmpFiles\system.tmp
+2025-12-01 16:38:59,105 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\stm32g4xx_hal_timebase_tim.c_save
+2025-12-01 16:38:59,230 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\stm32g4xx_hal_timebase_tim.c
+2025-12-01 16:38:59,251 [INFO] CodeEngine:321 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\stm32g4xx_hal_conf.h_save
+2025-12-01 16:38:59,465 [INFO] CodeEngine:345 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\stm32g4xx_hal_conf.h
+2025-12-01 16:38:59,510 [WARN] IPConfigManager:3238 - Warning: the RefConfig RCC_CommonPeriphClockConfig is not available in your config.xml file
+2025-12-01 16:38:59,529 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\main.h_save
+2025-12-01 16:38:59,785 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Inc\main.h
+2025-12-01 16:38:59,800 [INFO] CodeEngine:265 - oldGeneratedFile, C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\main.c_save
+2025-12-01 16:38:59,969 [INFO] CodeEngine:289 - Generated code: C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\Core\Src\main.c
+2025-12-01 16:39:00,485 [INFO] ProjectBuilder:3606 - Time for Copy HAL[1] : 220mS.
+2025-12-01 16:39:00,491 [INFO] ProjectBuilder:5216 - Project Generator version: 4.7.0-B52
+2025-12-01 16:39:00,607 [INFO] ConfigFileManager:1595 - The Die is : DIE469
+2025-12-01 16:39:02,668 [INFO] ProjectBuilder:5496 - Time for Generating toolchain IDE Files: 2177mS.
+2025-12-01 16:39:02,681 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 1mS.
+2025-12-01 16:39:02,693 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.

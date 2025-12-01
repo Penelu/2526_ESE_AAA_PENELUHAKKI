@@ -19,10 +19,6 @@ void motor_init(void);
 
 void motor_set_duty(uint32_t duty);
 
-void motor_start(void);
-
-void motor_stop(void);
-
 #endif // MOTOR_H
 
 
