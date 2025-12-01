@@ -37,34 +37,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := NUCLEO-G474RET6-Inverter_Base
+BUILD_ARTIFACT_NAME := Base
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-NUCLEO-G474RET6-Inverter_Base.elf \
+Base.elf \
 
 MAP_FILES += \
-NUCLEO-G474RET6-Inverter_Base.map \
+Base.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-NUCLEO-G474RET6-Inverter_Base.list \
+Base.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: NUCLEO-G474RET6-Inverter_Base.elf secondary-outputs
+main-build: Base.elf secondary-outputs
 
 # Tool invocations
-NUCLEO-G474RET6-Inverter_Base.elf NUCLEO-G474RET6-Inverter_Base.map: $(OBJS) $(USER_OBJS) /home/nicolas/git/2526_MSC_SAC/TP/software/Base/STM32G474RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "NUCLEO-G474RET6-Inverter_Base.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/nicolas/git/2526_MSC_SAC/TP/software/Base/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NUCLEO-G474RET6-Inverter_Base.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Base.elf Base.map: $(OBJS) $(USER_OBJS) C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\STM32G474RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Base.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\penel\Documents\ENSEA\3eme\ACTIONNEUR\2526_ESE_AAA_PENELUHAKKI\software\Base\STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Base.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -73,14 +73,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-NUCLEO-G474RET6-Inverter_Base.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "NUCLEO-G474RET6-Inverter_Base.list"
+Base.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Base.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) NUCLEO-G474RET6-Inverter_Base.elf NUCLEO-G474RET6-Inverter_Base.list NUCLEO-G474RET6-Inverter_Base.map default.size.stdout
+	-$(RM) Base.elf Base.list Base.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

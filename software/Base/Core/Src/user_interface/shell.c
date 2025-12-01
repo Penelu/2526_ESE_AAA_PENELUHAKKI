@@ -6,6 +6,7 @@
  */
 
 #include "user_interface/shell.h"
+#include "tim.h"   // Access to htim1 and TIM_CHANNEL_x
 
 h_shell_t hshell1;
 
@@ -13,6 +14,58 @@ h_shell_t hshell1;
  * @brief Transmit function for shell driver using UART2
  */
 
+// -----------------------------------------------------------------------------
+// Command: speed XXXX
+// Controls the motor speed by modifying the PWM duty cycle.
+//
+// XXXX = integer duty value between 0 and ARR
+// Example: speed 3000
+//
+// -----------------------------------------------------------------------------
+static int sh_speed(h_shell_t* h_shell, int argc, char** argv)
+{
+    uint32_t value = 0;
+    uint32_t max = __HAL_TIM_GET_AUTORELOAD(&htim1); // Timer's ARR (maximum duty)
+    int size;
+
+    if (argc < 2) {
+        size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
+                        "Usage: speed <0-%lu>\r\n", (unsigned long)max);
+        h_shell->drv.transmit(h_shell->print_buffer, size);
+        return -1;
+    }
+
+    char* p = argv[1];
+    while (*p != '\0') {
+
+        // Reject any non-digit character
+        if (*p < '0' || *p > '9') {
+            size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
+                            "Error: \"%s\" is not a valid number\r\n", argv[1]);
+            h_shell->drv.transmit(h_shell->print_buffer, size);
+            return -1;
+        }
+
+        // Build integer digit by digit
+        value = value * 10 + (uint32_t)(*p - '0');
+        p++;
+    }
+
+    if (value > max) {
+        value = max;
+    }
+
+    // Apply the duty cycle to the PWM channels
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, value);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, value);
+
+    size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
+                    "Applied speed: %lu / %lu\r\n",
+                    (unsigned long)value, (unsigned long)max);
+    h_shell->drv.transmit(h_shell->print_buffer, size);
+
+    return 0;
+}
 
 
 /**
@@ -104,6 +157,7 @@ void shell_init(h_shell_t* h_shell)
 
 	shell_add(h_shell, "help", sh_help, "Help");
 	shell_add(h_shell, "test", sh_test_list, "Test list");
+	shell_add(h_shell, "speed", sh_speed, "Motor speed command");
 }
 
 /**

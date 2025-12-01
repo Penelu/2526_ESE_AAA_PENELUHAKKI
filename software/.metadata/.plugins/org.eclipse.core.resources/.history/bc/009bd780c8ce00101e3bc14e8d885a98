@@ -1,0 +1,53 @@
+/*
+ * motor.c
+ *
+ *  Created on: Nov 11, 2025
+ *      Author: nicolas
+ */
+
+#include "motor_control/motor.h"
+
+static uint32_t pwm_max = 0;
+
+uint32_t motor_get_pwm_max(void)
+{
+    return pwm_max;
+}
+
+void motor_init(void)
+{
+    // Lê o ARR configurado pelo CubeMX
+    pwm_max = __HAL_TIM_GET_AUTORELOAD(&htim1);
+
+    // Define um duty inicial de 60%
+    uint32_t duty60 = (pwm_max + 1) * 60 / 100;
+
+    if (duty60 > pwm_max) {
+        duty60 = pwm_max;
+    }
+
+    // Aplica o duty nos canais U e V (CH1 e CH2)
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, duty60);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, duty60);
+
+    // Inicia as 4 PWMs: CH1, CH1N, CH2, CH2N
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+    HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
+
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+    HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
+}
+
+void motor_set_duty(uint32_t duty)
+{
+    if (pwm_max == 0) {
+        pwm_max = __HAL_TIM_GET_AUTORELOAD(&htim1);
+    }
+
+    if (duty > pwm_max) {
+        duty = pwm_max;
+    }
+
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, duty);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, duty);
+}

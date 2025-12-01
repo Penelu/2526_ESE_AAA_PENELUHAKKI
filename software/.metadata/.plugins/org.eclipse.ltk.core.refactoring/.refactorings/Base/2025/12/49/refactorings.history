@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Base/NUCLEO-G474RET6-Inverter_Base.ioc&apos; to &apos;Base.ioc&apos;" description="Rename resource &apos;NUCLEO-G474RET6-Inverter_Base.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="NUCLEO-G474RET6-Inverter_Base.ioc" name="Base.ioc" stamp="1764596038125" updateReferences="true"/>
+</session>

@@ -1,0 +1,21 @@
+/*
+ * motor.h
+ *
+ *  Created on: Nov 11, 2025
+ *      Author: nicolas
+ */
+
+#ifndef MOTOR_H
+#define MOTOR_H
+
+#include "main.h"
+#include "tim.h"   // para htim1
+
+// Podemos pegar o valor máximo diretamente do ARR do timer
+uint32_t motor_get_pwm_max(void);
+
+void motor_init(void);
+void motor_set_duty(uint32_t duty);   // duty entre 0 e PWM_MAX
+
+#endif // MOTOR_H
+
