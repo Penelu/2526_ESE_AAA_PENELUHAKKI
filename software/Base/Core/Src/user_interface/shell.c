@@ -11,27 +11,15 @@
 
 h_shell_t hshell1;
 
-/**
- * @brief Transmit function for shell driver using UART2
- */
-
 // -----------------------------------------------------------------------------
 // Command: speed XXXX
-// Controls the motor speed by modifying the PWM duty cycle.
-//
-// XXXX = integer duty value between 0 and ARR
-// Example: speed 3000
-//
 // -----------------------------------------------------------------------------
 static int sh_speed(h_shell_t* h_shell, int argc, char** argv)
 {
-    uint32_t value = 0;
-    uint32_t max = __HAL_TIM_GET_AUTORELOAD(&htim1); // Timer's ARR (maximum duty)
+    uint32_t target = 0;
+    uint32_t max    = motor_get_pwm_max();
     int size;
 
-    // -------------------------------------------------------------------------
-    // 1. Check if an argument was given
-    // -------------------------------------------------------------------------
     if (argc < 2) {
         size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
                         "Usage: speed <0-%lu>\r\n", (unsigned long)max);
@@ -39,73 +27,60 @@ static int sh_speed(h_shell_t* h_shell, int argc, char** argv)
         return -1;
     }
 
-    // -------------------------------------------------------------------------
-    // 2. Manual conversion of the characters to an integer
-    //    (without using atoi, respecting the TP instructions)
-    // -------------------------------------------------------------------------
-    char* p = argv[1];
+    char *p = argv[1];
     while (*p != '\0') {
-
-        // Reject any non-digit character
         if (*p < '0' || *p > '9') {
             size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
                             "Error: \"%s\" is not a valid number\r\n", argv[1]);
             h_shell->drv.transmit(h_shell->print_buffer, size);
             return -1;
         }
-
-        // Build integer digit by digit
-        value = value * 10 + (uint32_t)(*p - '0');
+        target = target * 10U + (uint32_t)(*p - '0');
         p++;
     }
 
-    // -------------------------------------------------------------------------
-    // 3. Limit the value to the allowed maximum (i.e., ARR)
-    // -------------------------------------------------------------------------
-    if (value > max) {
-        value = max;
+    if (target > max) {
+        target = max;
     }
 
-    // -------------------------------------------------------------------------
-    // 4. Apply the duty cycle to the PWM channels
-    //    TIM_CHANNEL_1  → High-side of phase U
-    //    TIM_CHANNEL_2  → High-side of phase V
-    //    (Complementary channels CH1N and CH2N use the same CCR automatically)
-    // -------------------------------------------------------------------------
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, value);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, value);
+    // Just set target; ramp will be done in main loop
+    motor_set_target(target);
 
-    // -------------------------------------------------------------------------
-    // 5. Print confirmation
-    // -------------------------------------------------------------------------
     size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
-                    "Applied speed: %lu / %lu\r\n",
-                    (unsigned long)value, (unsigned long)max);
+                    "Speed target set to: %lu / %lu\r\n",
+                    (unsigned long)target, (unsigned long)max);
     h_shell->drv.transmit(h_shell->print_buffer, size);
 
     return 0;
 }
-
+// -----------------------------------------------------------------------------
+// Command: start
+// - Sets duty cycle to 50% (alpha = 0.5 -> average motor voltage = 0)
+// - Starts PWM generation on TIM1 CH1/CH1N and CH2/CH2N
+// -----------------------------------------------------------------------------
 static int sh_start(h_shell_t* h_shell, int argc, char** argv)
 {
-    motor_start();
+	(void)argc;
+	(void)argv;
 
-    int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
-                        "Motor started: duty = 50%% of PWM_MAX\r\n");
-    h_shell->drv.transmit(h_shell->print_buffer, size);
+	motor_start();
 
-    return 0;
+	int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
+			"Motor started: duty = 50%% of PWM_MAX\r\n");
+	h_shell->drv.transmit(h_shell->print_buffer, size);
+
+	return 0;
 }
 
 static int sh_stop(h_shell_t* h_shell, int argc, char** argv)
 {
-    motor_stop();
+	motor_stop();
 
-    int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
-                        "Motor stopped: PWM disabled\r\n");
-    h_shell->drv.transmit(h_shell->print_buffer, size);
+	int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE,
+			"Motor stopped: PWM disabled\r\n");
+	h_shell->drv.transmit(h_shell->print_buffer, size);
 
-    return 0;
+	return 0;
 }
 
 
@@ -176,9 +151,6 @@ static int sh_test_list(h_shell_t* h_shell, int argc, char** argv)
 	}
 	return 0;
 }
-
-
-
 
 /**
  * @brief Initializes the shell instance.
