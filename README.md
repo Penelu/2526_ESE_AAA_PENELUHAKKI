@@ -294,3 +294,8 @@ La vitesse de la rampe peut être ajustée en modifiant :
 - ou la fréquence d’appel de cette fonction.
 
 [video_pwm_avec_rampe](images/rampe.mp4)
+
+# 7.2 mesure de courant 
+
+[input_analog.c](software/Base/Core/Src/acquisition/input_analog.c)
+![Figure 07](images/mesure.png)
