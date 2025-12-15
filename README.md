@@ -1,5 +1,5 @@
 
-# Projet Hacheur MCC 
+# Projet Hacheur MCC
 ### ENSEA – 2526-S9-ESE_3 – Actionneurs & Automatique Appliquée  
 ### Projet Onduleur Triphasé Didactique – 60V / 10A  
 ### Rédaction : Houssam Hakki & Joao Pedro Penelu  
@@ -150,6 +150,8 @@ L'objectif était d'observer le comportement du moteur pour différents rapports
 
  Ce fonctionnement constitue une base saine pour les tests suivants.
 
+![Figure 05](images/50precent.png)
+
 ---
 
 ## Test 2 — Rapport cyclique 70 %
@@ -164,7 +166,11 @@ Lors d’un passage direct de 50 % à 70 %, un phénomène indésirable apparaî
 Ce comportement est **normal** en boucle ouverte :
 le moteur n’a aucune rampe d'accélération, et l’augmentation soudaine du rapport cyclique provoque un **appel de courant important**, susceptible d’endommager les MOSFET ou la carte.
 
-[![Video Demo](Photos/video_thumbnail.png)](Videos/demo.mp4)
+[![Video Demo](images/video_thumbnail.png)](Videos/demo.mp4)
+
+![Figure 06](images/6000_85000precent.png)
+
+![Figure 06](images/vmot_amot.png)
 
 ---
 
@@ -287,5 +293,4 @@ La vitesse de la rampe peut être ajustée en modifiant :
 
 - ou la fréquence d’appel de cette fonction.
 
-[video_pwm_avec_rampe](Videos/rampe.mp4)
-
+[video_pwm_avec_rampe](images/rampe.mp4)
