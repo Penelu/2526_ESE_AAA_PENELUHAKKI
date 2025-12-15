@@ -166,7 +166,7 @@ Lors d’un passage direct de 50 % à 70 %, un phénomène indésirable apparaî
 Ce comportement est **normal** en boucle ouverte :
 le moteur n’a aucune rampe d'accélération, et l’augmentation soudaine du rapport cyclique provoque un **appel de courant important**, susceptible d’endommager les MOSFET ou la carte.
 
-[![Video Demo](images/video_thumbnail.png)](Videos/demo.mp4)
+[![Video Demo](images/video_thumbnail.png)](images/demo.mp4)
 
 ![Figure 06](images/6000_85000precent.png)
 
