@@ -1,5 +1,5 @@
 
-# Projet Hacheur MCC – Séance 1  
+# Projet Hacheur MCC 
 ### ENSEA – 2526-S9-ESE_3 – Actionneurs & Automatique Appliquée  
 ### Projet Onduleur Triphasé Didactique – 60V / 10A  
 ### Rédaction : Houssam Hakki & Joao Pedro Penelu  
@@ -190,6 +190,102 @@ void motor_set_ramp(uint16_t target)
         HAL_Delay(1); // Durée ajustable pour contrôler la vitesse de la rampe
     }
 }
+``` 
+
+---
+
+# 6. Limites de la rampe bloquante
+
+La fonction `motor_set_ramp()` présentée précédemment repose sur une boucle bloquante associée à `HAL_Delay()`.  
+Bien que fonctionnelle d’un point de vue purement algorithmique, cette approche n’est **pas adaptée à un système embarqué temps réel** basé sur interruptions.
+
+### Problèmes identifiés
+
+Cette implémentation présente plusieurs limitations importantes :
+
+- `HAL_Delay()` est une fonction **bloquante** qui monopolise le CPU.
+- Le microcontrôleur ne peut plus exécuter d’autres tâches pendant la rampe.
+- Les interruptions (UART, timers, événements externes) ne peuvent pas être traitées correctement.
+- En cas de déclenchement depuis une interruption, le comportement devient non déterministe.
+- Le système perd sa réactivité globale.
+
+👉 Cette approche ne respecte donc pas les bonnes pratiques de conception temps réel sur STM32.
+
+---
+
+# 7. Architecture retenue : rampe non bloquante pilotée par événement
+
+Afin de garantir un fonctionnement robuste et temps réel, nous avons mis en place une **rampe d’accélération non bloquante**, pilotée par une consigne interne et exécutée de manière progressive.
+
+[app.c](software/Base/Core/Src/app.c)
+
+[motor.c](software/Base/Core/Src/motor_control/motor.c)
+
+### Principe général
+
+- Les **interruptions ou commandes utilisateur** ne modifient jamais directement la PWM.
+- Elles se contentent de mettre à jour une **consigne de vitesse cible**.
+- Une fonction exécutée périodiquement ajuste progressivement le rapport cyclique vers cette consigne.
+- Aucune boucle bloquante n’est utilisée.
+
+Cette architecture permet au système de continuer à exécuter toutes les autres tâches (shell, acquisitions futures, etc.).
+
+---
 
 
+## Variables internes de contrôle
+
+Le module moteur utilise les variables internes suivantes :
+
+```c
+static uint16_t motor_duty;          // Rapport cyclique actuel
+static uint16_t motor_target_duty;   // Consigne cible
+static uint8_t  ramp_active;         // Indique si une rampe est en cours
+```
+motor_target_duty est mise à jour lors d’une commande speed.
+
+motor_duty évolue progressivement.
+
+ramp_active permet de gérer l’état de la rampe.
+
+## Mise à jour progressive dans la boucle principale
+
+La montée ou la descente du rapport cyclique est effectuée dans une fonction appelée régulièrement depuis la boucle principale :
+
+```c
+void motor_ramp_task(void)
+{
+    if (!ramp_active)
+        return;
+
+    if (motor_duty < motor_target_duty)
+        motor_duty++;
+    else if (motor_duty > motor_target_duty)
+        motor_duty--;
+    else {
+        ramp_active = 0;
+        return;
+    }
+
+    motor_set_duty(motor_duty);
+}
+```
+
+Cette fonction :
+
+- est rapide et non bloquante,
+
+- s’exécute en quelques cycles CPU,
+
+- laisse le système gérer correctement les interruptions,
+
+- garantit une accélération progressive du moteur.
+
+La vitesse de la rampe peut être ajustée en modifiant :
+
+- l’incrément appliqué,
+
+- ou la fréquence d’appel de cette fonction.
+
+[video_pwm_avec_rampe](Videos/rampe.mp4)
 
