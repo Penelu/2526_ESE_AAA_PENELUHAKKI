@@ -7,7 +7,9 @@
 
 #include "user_interface/shell.h"
 #include "motor_control/motor.h"
+#include "acquisition/input_analog.h"
 #include "tim.h"   // Access to htim1 and TIM_CHANNEL_x
+#include <stdio.h>
 
 h_shell_t hshell1;
 
@@ -174,7 +176,6 @@ void shell_init(h_shell_t* h_shell)
 	shell_add(h_shell, "speed", sh_speed, "Motor speed command");
 	shell_add(h_shell, "start", sh_start, "Start PWM at 50% duty");
 	shell_add(h_shell, "stop",  sh_stop, "Stop PWM generation");
-
 }
 
 /**

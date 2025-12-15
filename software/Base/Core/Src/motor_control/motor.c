@@ -112,6 +112,8 @@ void motor_start(void)
 
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
     HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
+
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
 }
 
 void motor_stop(void)
